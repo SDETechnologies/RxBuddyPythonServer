@@ -5,3 +5,4 @@ Flask-RESTful==0.3.10
 PyMySQL==1.0.3
 cloud-sql-python-connector==1.2.3
 SQLAlchemy==2.0.15
+gunicorn==20.1.0
