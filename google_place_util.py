@@ -22,8 +22,12 @@ import sqlalchemy
 #     instance_connection_name = os.environ['DB_SOCKET_PATH']
 #     )
 
+ip_type = IPTypes.PRIVATE if os.environ.get("PRIVATE_IP") else IPTypes.PUBLIC
+
+connector = Connector(ip_type)
+
 def getconn() -> pymysql.connections.Connection:
-        conn: pymysql.connections.Connection = Connector.connect(
+        conn: pymysql.connections.Connection = connector.connect(
             os.environ['DB_SOCKET_PATH'],
             "pymysql",
             user=os.environ['DB_USER'],
