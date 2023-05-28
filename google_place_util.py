@@ -32,12 +32,12 @@ def getconn() -> pymysql.connections.Connection:
         )
         return conn
 
-pool = sqlalchemy.create_engine(
+engine = sqlalchemy.create_engine(
         "mysql+pymysql://",
         creator=getconn,
         # ...
     )
-db = pool.get_connection()
+db = engine.connect()
 cur = db.cursor()
 
 
@@ -138,10 +138,11 @@ def insertPharmacy(name, address, phoneNumber, businessStatus, googlePlaceID, go
     sql = "INSERT INTO pharmacies (name, address, phone_number, business_status, google_place_id, google_url, location) VALUES (%s,%s,%s,%s,%s,%s,%s)"
     sql = "INSERT INTO pharmacies (name, address, phone_number, business_status, google_place_id, google_url, location) VALUES (%s,%s,%s,%s,%s,%s,ST_GeomFromText('POINT(33.64380000000001 -84.01697999999999)',3426))"
     sql = "INSERT INTO pharmacies (name, address, phone_number, business_status, google_place_id, google_url, location) VALUES (%s,%s,%s,%s,%s,%s,ST_GeomFromText(%s,4326))"
-    # test = sql % (name, address, phoneNumber, businessStatus, googlePlaceID, googleURL, geog_type)
-    # test = sql % (name, address, phoneNumber, businessStatus, googlePlaceID, googleURL)
-    # print('test: ', test)
+    # # test = sql % (name, address, phoneNumber, businessStatus, googlePlaceID, googleURL, geog_type)
+    # # test = sql % (name, address, phoneNumber, businessStatus, googlePlaceID, googleURL)
+    # # print('test: ', test)
     cursor.execute(sql, data)
+    # query = db.
 
 def checkPharmacyExists(placeID):
         sql = 'SELECT * FROM pharmacies where google_place_id = %s'
