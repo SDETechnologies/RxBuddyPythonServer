@@ -8,7 +8,7 @@ db = mysql.connector.connect(
     user = os.environ['DB_USER'],
     password = os.environ['DB_PASSWORD'],
     database = "rxbuddy",
-    socketPath=os.environ['DB_SOCKET_PATH']
+    instance_connection_name = os.environ['DB_SOCKET_PATH']
     )
 
 cur = db.cursor()
