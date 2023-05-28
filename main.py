@@ -55,6 +55,7 @@ api.add_resource(CheckZipcode, '/checkzipcode')
 
 # print('testData: ', testData)
 
+print('---------------------------------------')
 
 if __name__ == '__main__':
     app.run()  # run our Flask app
