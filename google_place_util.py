@@ -37,7 +37,9 @@ engine = sqlalchemy.create_engine(
         creator=getconn,
         # ...
     )
-db = engine.connect()
+# db = engine.connect()
+# cur = db.cursor()
+db = getconn()
 cur = db.cursor()
 
 
