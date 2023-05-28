@@ -28,7 +28,7 @@ def getconn() -> pymysql.connections.Connection:
             "pymysql",
             user=os.environ['DB_USER'],
             password=os.environ['DB_PASSWORD'],
-            db=db_name,
+            db="rxbuddy",
         )
         return conn
 
