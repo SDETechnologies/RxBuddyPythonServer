@@ -10,7 +10,7 @@ ENV APP_HOME /app
 WORKDIR $APP_HOME
 COPY . ./
 
-RUN install "cloud-sql-python-connector[pymysql]"
+RUN install cloud-sql-python-connector[pymysql]
 # Install production dependencies.
 RUN pip install --no-cache-dir -r requirements.txt
 
