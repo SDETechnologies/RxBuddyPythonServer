@@ -23,7 +23,7 @@ import sqlalchemy
 #     )
 
 def getconn() -> pymysql.connections.Connection:
-        conn: pymysql.connections.Connection = connector.connect(
+        conn: pymysql.connections.Connection = Connector.connect(
             os.environ['DB_SOCKET_PATH'],
             "pymysql",
             user=os.environ['DB_USER'],
