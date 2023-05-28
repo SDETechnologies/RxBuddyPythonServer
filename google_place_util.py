@@ -2,15 +2,41 @@ import requests
 import time
 import mysql.connector
 import os
+from google.cloud.sql.connector import Connector, IPTypes
+import pymysql
+import sqlalchemy
 
-db = mysql.connector.connect(
-    # host = os.environ['DB_HOST'],
-    user = os.environ['DB_USER'],
-    password = os.environ['DB_PASSWORD'],
-    database = "rxbuddy",
-    instance_connection_name = os.environ['DB_SOCKET_PATH']
+# db = mysql.connector.connect(
+#     # host = os.environ['DB_HOST'],
+#     user = os.environ['DB_USER'],
+#     password = os.environ['DB_PASSWORD'],
+#     database = "rxbuddy",
+#     instance_connection_name = os.environ['DB_SOCKET_PATH']
+#     )
+
+# db = mysql.connector.connect(
+#     # host = os.environ['DB_HOST'],
+#     user = os.environ['DB_USER'],
+#     password = os.environ['DB_PASSWORD'],
+#     database = "rxbuddy",
+#     instance_connection_name = os.environ['DB_SOCKET_PATH']
+#     )
+
+def getconn() -> pymysql.connections.Connection:
+        conn: pymysql.connections.Connection = connector.connect(
+            instance_connection_name,
+            "pymysql",
+            user=os.environ['DB_USER'],
+            password=os.environ['DB_PASSWORD'],
+            db=db_name,
+        )
+        return conn
+
+db = sqlalchemy.create_engine(
+        "mysql+pymysql://",
+        creator=getconn,
+        # ...
     )
-
 cur = db.cursor()
 
 
