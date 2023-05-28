@@ -24,7 +24,7 @@ import sqlalchemy
 
 def getconn() -> pymysql.connections.Connection:
         conn: pymysql.connections.Connection = connector.connect(
-            instance_connection_name,
+            os.environ['DB_SOCKET_PATH'],
             "pymysql",
             user=os.environ['DB_USER'],
             password=os.environ['DB_PASSWORD'],
