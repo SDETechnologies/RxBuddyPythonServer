@@ -32,11 +32,12 @@ def getconn() -> pymysql.connections.Connection:
         )
         return conn
 
-db = sqlalchemy.create_engine(
+pool = sqlalchemy.create_engine(
         "mysql+pymysql://",
         creator=getconn,
         # ...
     )
+db = pool.get_connection()
 cur = db.cursor()
 
 
