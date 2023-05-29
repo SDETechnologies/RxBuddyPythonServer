@@ -9,7 +9,7 @@ from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
 api = Api(app)
-# cors = CORS(app, resources={r"/*": {"origins": "https://rxbuddy.net"}})
+cors = CORS(app, resources={r"/*": {"origins": "https://rxbuddy.net"}})
 
 data = {
         'waiting_for_request': True,
@@ -31,8 +31,8 @@ class CheckZipcode(Resource):
     def get(self):
         return data, 200
     def post(self):
-        print('request.form: ', request.form)
-        print('request.data: ', request.data)
+        # print('request.form: ', request.form)
+        # print('request.data: ', request.data)
         # postData = request.form
         postData = json.loads(request.data)
         print('postData: ', postData)
