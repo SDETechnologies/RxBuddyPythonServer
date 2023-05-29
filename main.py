@@ -1,5 +1,6 @@
 import requests
 import os
+import json
 from flask import Flask
 from flask_restful import Resource, Api, reqparse
 from google_place_util import *
@@ -28,7 +29,8 @@ class CheckZipcode(Resource):
     def get(self):
         return data, 200
     def post(self):
-        postData = request.form
+        # postData = request.form
+        postData = json.loads(request.data)
         print('postData: ', postData)
         zipcode = postData['zipcode']
         print('zipcode: ', zipcode)
