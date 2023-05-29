@@ -31,6 +31,8 @@ class CheckZipcode(Resource):
     def get(self):
         return data, 200
     def post(self):
+        print('request.form: ', request.form)
+        print('request.data: ', request.data)
         # postData = request.form
         postData = json.loads(request.data)
         print('postData: ', postData)
