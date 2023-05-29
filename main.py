@@ -5,9 +5,11 @@ from flask import Flask
 from flask_restful import Resource, Api, reqparse
 from google_place_util import *
 from flask import request
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
 api = Api(app)
+cors = CORS(app, resources={r"/*": {"origins": "https://rxbuddy.net"}})
 
 data = {
         'waiting_for_request': True,
