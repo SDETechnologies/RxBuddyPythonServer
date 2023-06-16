@@ -6,4 +6,5 @@ PyMySQL==1.0.3
 cloud-sql-python-connector==1.2.3
 SQLAlchemy==2.0.15
 gunicorn==20.1.0
-Flask-Cors== 3.0.10
+Flask-Cors==3.0.10
+pandas==1.5.3
