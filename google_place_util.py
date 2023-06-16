@@ -6,6 +6,9 @@ from google.cloud.sql.connector import Connector, IPTypes
 import pymysql
 import sqlalchemy
 
+ENV_TYPE = os.environ.get('ENV_TYPE')
+print('environment type: ', ENV_TYPE)
+
 # db = mysql.connector.connect(
 #     # host = os.environ['DB_HOST'],
 #     user = os.environ['DB_USER'],
@@ -26,7 +29,17 @@ ip_type = IPTypes.PRIVATE if os.environ.get("PRIVATE_IP") else IPTypes.PUBLIC
 
 connector = Connector(ip_type)
 
-def getconn() -> pymysql.connections.Connection:
+def getconn_dev():
+    db = mysql.connector.connect(
+    host = os.environ['DB_HOST'],
+    user = os.environ['DB_USER'],
+    password = os.environ['DB_PASSWORD'],
+    database = "rxbuddy",
+    # instance_connection_name = os.environ['DB_SOCKET_PATH']
+    )
+    return db
+
+def getconn_prod() -> pymysql.connections.Connection:
         conn: pymysql.connections.Connection = connector.connect(
             os.environ['DB_SOCKET_PATH'],
             "pymysql",
@@ -36,14 +49,20 @@ def getconn() -> pymysql.connections.Connection:
         )
         return conn
 
-engine = sqlalchemy.create_engine(
-        "mysql+pymysql://",
-        creator=getconn,
-        # ...
-    )
-# db = engine.connect()
-# cur = db.cursor()
-db = getconn()
+# engine = sqlalchemy.create_engine(
+#         "mysql+pymysql://",
+#         creator=getconn,
+#         # ...
+#     )
+# # db = engine.connect()
+# # cur = db.cursor()
+
+if ENV_TYPE == 'dev':
+    db = getconn_dev()
+else:
+    db = getconn_prod()
+
+
 cur = db.cursor()
 
 
